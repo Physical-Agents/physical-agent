@@ -6,6 +6,7 @@ import { SplineScene } from '@/components/ui/splite';
 import { Spotlight } from '@/components/ui/spotlight';
 import { Card } from '@/components/ui/card';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { ContactForm } from '@/components/contact-form';
 
 export default function Home() {
     const [isRobotReady, setIsRobotReady] = useState(false);
@@ -190,56 +191,7 @@ export default function Home() {
                         </p>
                     </div>
 
-                    <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="flex flex-col gap-2">
-                                <label htmlFor="name" className="text-sm font-medium text-muted-foreground">Full Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    placeholder="John Doe"
-                                    className="h-12 w-full rounded-xl bg-background/50 border border-foreground/10 px-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <label htmlFor="email" className="text-sm font-medium text-muted-foreground">Work Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="john@company.com"
-                                    className="h-12 w-full rounded-xl bg-background/50 border border-foreground/10 px-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <label htmlFor="company" className="text-sm font-medium text-muted-foreground">Company Name</label>
-                            <input
-                                type="text"
-                                id="company"
-                                placeholder="Robotics Inc."
-                                className="h-12 w-full rounded-xl bg-background/50 border border-foreground/10 px-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
-                            />
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <label htmlFor="message" className="text-sm font-medium text-muted-foreground">How can we help?</label>
-                            <textarea
-                                id="message"
-                                rows={4}
-                                placeholder="Tell us about your robotic automation needs..."
-                                className="w-full rounded-xl bg-background/50 border border-foreground/10 p-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all resize-none"
-                            ></textarea>
-                        </div>
-
-                        <button
-                            type="button"
-                            className="h-12 w-full mt-2 rounded-xl bg-foreground text-background font-semibold tracking-wide hover:bg-foreground/80 transition-colors flex items-center justify-center gap-2"
-                        >
-                            Send Message
-                            <ArrowRight className="w-4 h-4" />
-                        </button>
-                    </form>
+                    <ContactForm />
                 </div>
             </section>
 

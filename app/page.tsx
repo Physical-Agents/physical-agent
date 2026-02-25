@@ -1,0 +1,260 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Mail, ArrowRight, Bot, Bolt, Activity, BrainCircuit } from 'lucide-react';
+import { SplineScene } from '@/components/ui/splite';
+import { Spotlight } from '@/components/ui/spotlight';
+import { Card } from '@/components/ui/card';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+
+export default function Home() {
+    const [isRobotReady, setIsRobotReady] = useState(false);
+
+    useEffect(() => {
+        // Prevent browser from restoring previous scroll position
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
+        if (!isRobotReady) return;
+
+        const handlePointerMove = (e: PointerEvent) => {
+            const canvas = document.querySelector('canvas');
+            if (canvas && e.target !== canvas) {
+                canvas.dispatchEvent(new PointerEvent('pointermove', {
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    bubbles: true,
+                    cancelable: true,
+                    pointerId: e.pointerId,
+                    pointerType: e.pointerType,
+                }));
+            }
+        };
+        window.addEventListener('pointermove', handlePointerMove);
+        return () => window.removeEventListener('pointermove', handlePointerMove);
+    }, [isRobotReady]);
+
+    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+        e.preventDefault();
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    return (
+        <main className="min-h-screen bg-background flex flex-col items-center overflow-x-hidden w-full relative transition-colors duration-500" style={{ isolation: 'isolate' }}>
+            <Spotlight
+                className="-top-40 left-0 md:left-60 md:-top-20"
+                fill="currentColor"
+            />
+
+            {/* Navigation */}
+            <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex flex-row items-center justify-between z-50 fixed top-0 backdrop-blur-md bg-background/50 border-b border-foreground/10 opacity-90 transition-colors duration-500">
+                <a
+                    href="/"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="flex items-center gap-2 cursor-pointer group"
+                >
+                    <BrainCircuit className="text-foreground w-6 h-6 group-hover:text-foreground/80 transition-colors" />
+                    <span className="text-foreground font-bold text-xl tracking-wide group-hover:text-foreground/80 transition-colors">Physical Agents</span>
+                </a>
+
+                <div className="flex items-center gap-4">
+                    <ThemeToggle />
+                    <a
+                        href="#contact"
+                        onClick={(e) => scrollToSection(e, 'contact')}
+                        className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium border border-foreground/20 rounded-full px-5 py-2 hover:bg-foreground/10"
+                    >
+                        Contact Us
+                    </a>
+                </div>
+            </nav>
+
+            {/* Hero Section */}
+            <section style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden', isolation: 'isolate' }}>
+
+                {/* Layer 1: The Base Text Content. Hardcoded z-index 1. */}
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, display: 'flex', alignItems: 'center', pointerEvents: 'none' }}>
+                    <div className="w-full max-w-7xl mx-auto px-6">
+                        <div className="max-w-2xl relative pointer-events-none">
+
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 w-fit mb-6">
+                                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                                <span className="text-xs text-foreground/90 uppercase tracking-wider font-medium tracking-wide">Physical AI Infrastructure</span>
+                            </div>
+
+                            <div className="relative flex flex-col items-start mb-6">
+                                <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight md:leading-tight">
+                                    We Build <br className="hidden md:block" />
+                                    Skilled AI Agents <br className="hidden md:block" />
+                                    for Manufacturing
+                                </h1>
+                            </div>
+
+                            <p className="text-lg md:text-xl text-muted-foreground max-w-xl font-light mb-10 leading-relaxed">
+                                Physical AI Infrastructure to turn your robots into skilled agents. Experience the future of industrial automation.
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative pointer-events-auto">
+                                <a
+                                    href="#contact"
+                                    onClick={(e) => scrollToSection(e, 'contact')}
+                                    className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-foreground px-8 text-background font-medium transition-colors hover:bg-foreground/80"
+                                >
+                                    <Mail className="w-4 h-4 text-background" />
+                                    GET IN TOUCH
+                                </a>
+                                <a
+                                    href="#features"
+                                    onClick={(e) => scrollToSection(e, 'features')}
+                                    className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-transparent px-8 text-foreground font-medium border border-foreground/20 transition-colors hover:bg-foreground/5"
+                                >
+                                    Learn More
+                                    <ArrowRight className="w-4 h-4 text-foreground" />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {/* Layer 2: The 3D Render. Hardcoded z-index 9999. Placed IN FRONT of text! */}
+                {/* The wrapping div is explicitly pointer-events-none so it doesn't block the screen, but the inner div allows mouse tracking. */}
+                <div style={{ position: 'absolute', right: '2%', top: 'auto', bottom: '0px', width: '50%', height: '90vh', zIndex: 9999, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
+                        <SplineScene
+                            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                            className="w-full h-full object-contain"
+                            onLoad={() => {
+                                // Wait 4 seconds for the initial zoom-out animation to settle
+                                setTimeout(() => {
+                                    setIsRobotReady(true);
+                                }, 4000);
+                            }}
+                        />
+                    </div>
+                </div>
+
+            </section>
+
+            {/* Features Grid */}
+            <section id="features" className="w-full max-w-7xl mx-auto py-24 px-6 relative border-t border-foreground/10 mt-20" style={{ zIndex: 10 }}>
+                <div className="text-center mb-16">
+                    <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Empowering the Future of Robotics</h2>
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-lg">Next-generation cognitive frameworks built specifically to withstand the demands of modern manufacturing environments.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl">
+                        <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6 border border-blue-500/30">
+                            <Bot className="text-blue-500 w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-foreground mb-3">Skill Integration</h3>
+                        <p className="text-muted-foreground leading-relaxed">Seamlessly integrate adaptive skills into industrial robots with minimal setup time and human intervention.</p>
+                    </Card>
+
+                    <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl">
+                        <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6 border border-purple-500/30">
+                            <Bolt className="text-purple-500 w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-foreground mb-3">Real-time Performance</h3>
+                        <p className="text-muted-foreground leading-relaxed">Lightning-fast inference engines ensure operations run precisely without bottlenecks on the factory floor.</p>
+                    </Card>
+
+                    <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl">
+                        <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-6 border border-emerald-500/30">
+                            <Activity className="text-emerald-500 w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-foreground mb-3">Adaptive Learning</h3>
+                        <p className="text-muted-foreground leading-relaxed">Continuous model enhancement through active physical reinforcement and high-fidelity synthetic data.</p>
+                    </Card>
+                </div>
+            </section>
+
+            {/* Contact Form Section */}
+            <section id="contact" className="w-full max-w-4xl mx-auto py-24 px-6 relative z-10">
+                <div className="bg-foreground/[0.03] border border-foreground/[0.08] rounded-3xl p-8 md:p-12 backdrop-blur-sm">
+                    <div className="text-center mb-10">
+                        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
+                        <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+                            Ready to upgrade your manufacturing floor? Contact us to discuss how Physical Agents can transform your operations.
+                        </p>
+                    </div>
+
+                    <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="name" className="text-sm font-medium text-muted-foreground">Full Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="John Doe"
+                                    className="h-12 w-full rounded-xl bg-background/50 border border-foreground/10 px-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="email" className="text-sm font-medium text-muted-foreground">Work Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="john@company.com"
+                                    className="h-12 w-full rounded-xl bg-background/50 border border-foreground/10 px-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="company" className="text-sm font-medium text-muted-foreground">Company Name</label>
+                            <input
+                                type="text"
+                                id="company"
+                                placeholder="Robotics Inc."
+                                className="h-12 w-full rounded-xl bg-background/50 border border-foreground/10 px-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="message" className="text-sm font-medium text-muted-foreground">How can we help?</label>
+                            <textarea
+                                id="message"
+                                rows={4}
+                                placeholder="Tell us about your robotic automation needs..."
+                                className="w-full rounded-xl bg-background/50 border border-foreground/10 p-4 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all resize-none"
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type="button"
+                            className="h-12 w-full mt-2 rounded-xl bg-foreground text-background font-semibold tracking-wide hover:bg-foreground/80 transition-colors flex items-center justify-center gap-2"
+                        >
+                            Send Message
+                            <ArrowRight className="w-4 h-4" />
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="w-full border-t border-foreground/10 py-10 mt-auto bg-background relative" style={{ zIndex: 10 }}>
+                <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="flex items-center gap-2">
+                        <BrainCircuit className="text-foreground/50 w-5 h-5" />
+                        <span className="text-foreground/50 font-medium">Physical Agents</span>
+                    </div>
+                    <p className="text-foreground/40 text-sm">
+                        &copy; 2026 Physical Agents. All rights reserved.
+                    </p>
+                </div>
+            </footer>
+        </main>
+    );
+}

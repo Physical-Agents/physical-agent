@@ -55,7 +55,7 @@ export default function Home() {
             />
 
             {/* Navigation */}
-            <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex flex-row items-center justify-between z-50 fixed top-0 backdrop-blur-md bg-background/50 border-b border-foreground/10 opacity-90 transition-colors duration-500">
+            <nav className="w-full max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-row items-center justify-between z-50 fixed top-0 backdrop-blur-md bg-background/50 border-b border-foreground/10 opacity-90 transition-colors duration-500">
                 <a
                     href="/"
                     onClick={(e) => {
@@ -65,15 +65,16 @@ export default function Home() {
                     className="flex items-center gap-2 cursor-pointer group"
                 >
                     <BrainCircuit className="text-foreground w-6 h-6 group-hover:text-foreground/80 transition-colors" />
-                    <span className="text-foreground font-bold text-xl tracking-wide group-hover:text-foreground/80 transition-colors">Physical Agents</span>
+                    <span className="text-foreground font-bold text-lg md:text-xl tracking-wide group-hover:text-foreground/80 transition-colors hidden sm:block">Physical Agents</span>
+                    <span className="text-foreground font-bold text-lg tracking-wide group-hover:text-foreground/80 transition-colors sm:hidden">Agents</span>
                 </a>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 md:gap-4">
                     <ThemeToggle />
                     <a
                         href="#contact"
                         onClick={(e) => scrollToSection(e, 'contact')}
-                        className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium border border-foreground/20 rounded-full px-5 py-2 hover:bg-foreground/10"
+                        className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium border border-foreground/20 rounded-full px-4 py-2 md:px-5 md:py-2 hover:bg-foreground/10"
                     >
                         Contact Us
                     </a>
@@ -84,8 +85,8 @@ export default function Home() {
             <section style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden', isolation: 'isolate' }}>
 
                 {/* Layer 1: The Base Text Content. Hardcoded z-index 1. */}
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, display: 'flex', alignItems: 'center', pointerEvents: 'none' }}>
-                    <div className="w-full max-w-7xl mx-auto px-6">
+                <div className="absolute top-0 left-0 w-full h-full z-10 flex items-start pt-[120px] md:pt-0 md:items-center pointer-events-none">
+                    <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
                         <div className="max-w-2xl relative pointer-events-none">
 
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 w-fit mb-6">
@@ -94,22 +95,22 @@ export default function Home() {
                             </div>
 
                             <div className="relative flex flex-col items-start mb-6">
-                                <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight md:leading-tight">
+                                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground leading-tight md:leading-[1.1]">
                                     We Build <br className="hidden md:block" />
                                     Skilled AI Agents <br className="hidden md:block" />
                                     for Manufacturing
                                 </h1>
                             </div>
 
-                            <p className="text-lg md:text-xl text-muted-foreground max-w-xl font-light mb-10 leading-relaxed">
+                            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl font-light mb-8 md:mb-10 leading-relaxed md:leading-relaxed">
                                 Physical AI Infrastructure to turn your robots into skilled agents. Experience the future of industrial automation.
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative pointer-events-auto">
+                            <div className="flex flex-col flex-wrap sm:flex-row gap-3 md:gap-4 w-full relative pointer-events-auto">
                                 <a
                                     href="#contact"
                                     onClick={(e) => scrollToSection(e, 'contact')}
-                                    className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-foreground px-8 text-background font-medium transition-colors hover:bg-foreground/80"
+                                    className="inline-flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-foreground px-6 md:px-8 text-background font-medium transition-colors hover:bg-foreground/80"
                                 >
                                     <Mail className="w-4 h-4 text-background" />
                                     GET IN TOUCH
@@ -117,7 +118,7 @@ export default function Home() {
                                 <a
                                     href="#features"
                                     onClick={(e) => scrollToSection(e, 'features')}
-                                    className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-transparent px-8 text-foreground font-medium border border-foreground/20 transition-colors hover:bg-foreground/5"
+                                    className="inline-flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-transparent px-6 md:px-8 text-foreground font-medium border border-foreground/20 transition-colors hover:bg-foreground/5 relative z-20"
                                 >
                                     Learn More
                                     <ArrowRight className="w-4 h-4 text-foreground" />
@@ -130,7 +131,7 @@ export default function Home() {
 
                 {/* Layer 2: The 3D Render. Hardcoded z-index 9999. Placed IN FRONT of text! */}
                 {/* The wrapping div is explicitly pointer-events-none so it doesn't block the screen, but the inner div allows mouse tracking. */}
-                <div style={{ position: 'absolute', right: '2%', top: 'auto', bottom: '0px', width: '50%', height: '90vh', zIndex: 9999, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="absolute right-0 bottom-0 md:top-auto md:right-[2%] w-full h-[55vh] md:w-[50%] md:h-[90vh] z-[9999] pointer-events-none flex items-center justify-center">
                     <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
                         <SplineScene
                             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
@@ -148,10 +149,10 @@ export default function Home() {
             </section>
 
             {/* Features Grid */}
-            <section id="features" className="w-full max-w-7xl mx-auto py-24 px-6 relative border-t border-foreground/10 mt-20" style={{ zIndex: 10 }}>
-                <div className="text-center mb-16">
+            <section id="features" className="w-full max-w-7xl mx-auto py-16 md:py-24 px-4 md:px-6 relative border-t border-foreground/10 mt-10 md:mt-20" style={{ zIndex: 10 }}>
+                <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Empowering the Future of Robotics</h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto text-lg">Next-generation cognitive frameworks built specifically to withstand the demands of modern manufacturing environments.</p>
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">Next-generation cognitive frameworks built specifically to withstand the demands of modern manufacturing environments.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -182,11 +183,11 @@ export default function Home() {
             </section>
 
             {/* Contact Form Section */}
-            <section id="contact" className="w-full max-w-4xl mx-auto py-24 px-6 relative z-10">
-                <div className="bg-foreground/[0.03] border border-foreground/[0.08] rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-                    <div className="text-center mb-10">
+            <section id="contact" className="w-full max-w-4xl mx-auto py-16 md:py-24 px-4 md:px-6 relative z-10">
+                <div className="bg-foreground/[0.03] border border-foreground/[0.08] rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-sm">
+                    <div className="text-center mb-8 md:mb-10">
                         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
-                        <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+                        <p className="text-muted-foreground text-base md:text-lg max-w-lg mx-auto">
                             Ready to upgrade your manufacturing floor? Contact us to discuss how Physical Agents can transform your operations.
                         </p>
                     </div>
@@ -196,8 +197,8 @@ export default function Home() {
             </section>
 
             {/* Footer */}
-            <footer className="w-full border-t border-foreground/10 py-10 mt-auto bg-background relative" style={{ zIndex: 10 }}>
-                <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <footer className="w-full border-t border-foreground/10 py-8 md:py-10 mt-auto bg-background relative" style={{ zIndex: 10 }}>
+                <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
                         <BrainCircuit className="text-foreground/50 w-5 h-5" />
                         <span className="text-foreground/50 font-medium">Physical Agents</span>

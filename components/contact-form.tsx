@@ -18,17 +18,24 @@ export function ContactForm() {
         const form = event.currentTarget
         const formData = new FormData(form)
 
-        // Add Web3Forms access key
         // Fetch Web3Forms access key from environment variable
         formData.append('access_key', process.env.NEXT_PUBLIC_WEB_FORM as string)
 
         // Optional: Web3Forms subject line customization
         formData.append('subject', 'New Contact Form Submission from Physical Agents')
 
+        // Convert the form data to JSON
+        const object = Object.fromEntries(formData.entries())
+        const json = JSON.stringify(object)
+
         try {
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: json
             })
 
             const data = await response.json()

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Mail, ArrowRight, Bot, Bolt, Activity, BrainCircuit } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { SplineScene } from '@/components/ui/splite';
 import { Spotlight } from '@/components/ui/spotlight';
 import { Card } from '@/components/ui/card';
@@ -55,7 +56,12 @@ export default function Home() {
             />
 
             {/* Navigation */}
-            <nav className="w-full max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-row items-center justify-between z-50 fixed top-0 backdrop-blur-md bg-background/50 border-b border-foreground/10 opacity-90 transition-colors duration-500">
+            <motion.nav
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="w-full max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-row items-center justify-between z-50 fixed top-0 backdrop-blur-md bg-background/50 border-b border-foreground/10 opacity-90 transition-colors duration-500"
+            >
                 <a
                     href="/"
                     onClick={(e) => {
@@ -79,22 +85,27 @@ export default function Home() {
                         Contact Us
                     </a>
                 </div>
-            </nav>
+            </motion.nav>
 
             {/* Hero Section */}
             <section style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden', isolation: 'isolate' }}>
 
                 {/* Layer 1: The Base Text Content. Hardcoded z-index 1. */}
-                <div className="absolute top-0 left-0 w-full h-full z-10 flex items-start pt-[120px] md:pt-0 md:items-center pointer-events-none">
+                <div className="absolute top-0 left-0 w-full h-full z-10 flex items-center justify-center pointer-events-none pt-16 md:pt-0">
                     <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
-                        <div className="max-w-2xl relative pointer-events-none">
+                        <motion.div
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                            className="max-w-2xl relative pointer-events-none flex flex-col items-center text-center lg:items-start lg:text-left mx-auto lg:mx-0"
+                        >
 
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 w-fit mb-6">
                                 <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                                 <span className="text-xs text-foreground/90 uppercase tracking-wider font-medium tracking-wide">Physical AI Infrastructure</span>
                             </div>
 
-                            <div className="relative flex flex-col items-start mb-6">
+                            <div className="relative flex flex-col items-center lg:items-start mb-6 w-full">
                                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground leading-tight md:leading-[1.1]">
                                     We Build <br className="hidden md:block" />
                                     Skilled AI Agents <br className="hidden md:block" />
@@ -106,7 +117,7 @@ export default function Home() {
                                 Physical AI Infrastructure to turn your robots into skilled agents. Experience the future of industrial automation.
                             </p>
 
-                            <div className="flex flex-col flex-wrap sm:flex-row gap-3 md:gap-4 w-full relative pointer-events-auto">
+                            <div className="flex flex-col flex-wrap sm:flex-row justify-center lg:justify-start gap-3 md:gap-4 w-full relative pointer-events-auto">
                                 <a
                                     href="#contact"
                                     onClick={(e) => scrollToSection(e, 'contact')}
@@ -125,13 +136,18 @@ export default function Home() {
                                 </a>
                             </div>
 
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 
                 {/* Layer 2: The 3D Render. Hardcoded z-index 9999. Placed IN FRONT of text! */}
                 {/* The wrapping div is explicitly pointer-events-none so it doesn't block the screen, but the inner div allows mouse tracking. */}
-                <div className="absolute right-0 bottom-0 md:top-auto md:right-[2%] w-full h-[55vh] md:w-[50%] md:h-[90vh] z-[9999] pointer-events-none flex items-center justify-center">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+                    className="absolute right-0 bottom-0 lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 lg:right-[2%] w-full lg:w-[30vw] xl:w-[45vw] 2xl:w-[60vw] h-[55vh] lg:h-[50vh] xl:h-[75vh] 2xl:h-[95vh] z-[9999] pointer-events-none hidden lg:flex items-center justify-center"
+                >
                     <div style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}>
                         <SplineScene
                             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
@@ -144,47 +160,79 @@ export default function Home() {
                             }}
                         />
                     </div>
-                </div>
+                </motion.div>
 
             </section>
 
             {/* Features Grid */}
             <section id="features" className="w-full max-w-7xl mx-auto py-16 md:py-24 px-4 md:px-6 relative border-t border-foreground/10 mt-10 md:mt-20" style={{ zIndex: 10 }}>
-                <div className="text-center mb-12 md:mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-12 md:mb-16"
+                >
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Empowering the Future of Robotics</h2>
                     <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">Next-generation cognitive frameworks built specifically to withstand the demands of modern manufacturing environments.</p>
-                </div>
-
+                </motion.div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl">
-                        <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6 border border-blue-500/30">
-                            <Bot className="text-blue-500 w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-foreground mb-3">Skill Integration</h3>
-                        <p className="text-muted-foreground leading-relaxed">Seamlessly integrate adaptive skills into industrial robots with minimal setup time and human intervention.</p>
-                    </Card>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                        <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl h-full">
+                            <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6 border border-blue-500/30">
+                                <Bot className="text-blue-500 w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-semibold text-foreground mb-3">Skill Integration</h3>
+                            <p className="text-muted-foreground leading-relaxed">Seamlessly integrate adaptive skills into industrial robots with minimal setup time and human intervention.</p>
+                        </Card>
+                    </motion.div>
 
-                    <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl">
-                        <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6 border border-purple-500/30">
-                            <Bolt className="text-purple-500 w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-foreground mb-3">Real-time Performance</h3>
-                        <p className="text-muted-foreground leading-relaxed">Lightning-fast inference engines ensure operations run precisely without bottlenecks on the factory floor.</p>
-                    </Card>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl h-full">
+                            <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6 border border-purple-500/30">
+                                <Bolt className="text-purple-500 w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-semibold text-foreground mb-3">Real-time Performance</h3>
+                            <p className="text-muted-foreground leading-relaxed">Lightning-fast inference engines ensure operations run precisely without bottlenecks on the factory floor.</p>
+                        </Card>
+                    </motion.div>
 
-                    <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl">
-                        <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-6 border border-emerald-500/30">
-                            <Activity className="text-emerald-500 w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-foreground mb-3">Adaptive Learning</h3>
-                        <p className="text-muted-foreground leading-relaxed">Continuous model enhancement through active physical reinforcement and high-fidelity synthetic data.</p>
-                    </Card>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                        <Card className="bg-foreground/[0.03] border-foreground/[0.08] p-8 hover:bg-foreground/[0.05] transition-colors rounded-2xl h-full">
+                            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-6 border border-emerald-500/30">
+                                <Activity className="text-emerald-500 w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-semibold text-foreground mb-3">Adaptive Learning</h3>
+                            <p className="text-muted-foreground leading-relaxed">Continuous model enhancement through active physical reinforcement and high-fidelity synthetic data.</p>
+                        </Card>
+                    </motion.div>
                 </div>
             </section>
 
             {/* Contact Form Section */}
             <section id="contact" className="w-full max-w-4xl mx-auto py-16 md:py-24 px-4 md:px-6 relative z-10">
-                <div className="bg-foreground/[0.03] border border-foreground/[0.08] rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-sm">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-foreground/[0.03] border border-foreground/[0.08] rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-sm"
+                >
                     <div className="text-center mb-8 md:mb-10">
                         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
                         <p className="text-muted-foreground text-base md:text-lg max-w-lg mx-auto">
@@ -193,7 +241,7 @@ export default function Home() {
                     </div>
 
                     <ContactForm />
-                </div>
+                </motion.div>
             </section>
 
             {/* Footer */}

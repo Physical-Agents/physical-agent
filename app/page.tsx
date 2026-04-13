@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Mail, ArrowRight, Bot, Bolt, Activity, BrainCircuit } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -70,7 +71,7 @@ export default function Home() {
                     }}
                     className="flex items-center gap-2 cursor-pointer group"
                 >
-                    <BrainCircuit className="text-foreground w-6 h-6 group-hover:text-foreground/80 transition-colors" />
+                    <Image src="/logo.png" alt="Physical Agents Logo" width={40} height={40} className="group-hover:opacity-80 transition-opacity" priority />
                     <span className="text-foreground font-bold text-lg md:text-xl tracking-wide group-hover:text-foreground/80 transition-colors hidden sm:block">Physical Agents</span>
                     <span className="text-foreground font-bold text-lg tracking-wide group-hover:text-foreground/80 transition-colors sm:hidden">Agents</span>
                 </a>
@@ -248,7 +249,7 @@ export default function Home() {
             <footer className="w-full border-t border-foreground/10 py-8 md:py-10 mt-auto bg-background relative" style={{ zIndex: 10 }}>
                 <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
-                        <BrainCircuit className="text-foreground/50 w-5 h-5" />
+                        <Image src="/logo.png" alt="Physical Agents Logo" width={28} height={28} className="opacity-50" />
                         <span className="text-foreground/50 font-medium">Physical Agents</span>
                     </div>
                     <p className="text-foreground/40 text-sm">
